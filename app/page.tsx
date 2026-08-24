@@ -344,10 +344,6 @@ export default function Page() {
             ))}
           </div>
 
-          <p className="microcopy gallery-note">
-            (your real photos go in /public/images)
-          </p>
-
           <Button onClick={next}>
             Keep going <ArrowRight size={17} />
           </Button>
@@ -449,8 +445,10 @@ export default function Page() {
             <span className="envelope-paper">
               Dear Zulfa,
               <br />
-              <br />I hope this year gives you every gentle thing you deserve.
-              Thank you for being exactly you. I’m so lucky our paths crossed.
+              <br />
+              May this year bring you all the good things you deserve. Thank you
+              for being who you are. I'm so lucky to have you in my life, and I
+              hope you will forever! Love you!
               <br />
               <br />
               With all my heart,
