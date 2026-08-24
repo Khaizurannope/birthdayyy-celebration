@@ -1,0 +1,1271 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+:root {
+  color-scheme: light;
+  --background: #f7f1e8;
+  --foreground: #2b2423;
+  --burgundy: #7e2735;
+  --rose: #c98082;
+  --gold: #c99b5b;
+  --paper: #fffaf2;
+  --muted: #827674;
+  --line: #d9cfc2;
+  --radius: 0.35rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--burgundy);
+  --color-muted-foreground: var(--muted);
+  --color-border: var(--line);
+  --font-sans: "DM Sans", sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.birthday-shell {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.13;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.36'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-screen {
+  min-height: 100svh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  color: var(--burgundy);
+  background: var(--background);
+}
+
+.loading-screen p,
+.microcopy {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.loading-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--burgundy);
+  border-radius: 50%;
+  animation: pulse 1.6s ease infinite;
+}
+
+/* =========================================================
+   TOPBAR / FOOTER
+========================================================= */
+
+.topbar,
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px clamp(20px, 5vw, 72px);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.topbar {
+  top: 0;
+}
+
+.footer {
+  bottom: 0;
+}
+
+.monogram {
+  color: var(--burgundy);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.chapter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.music-control,
+.footer button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  text-transform: uppercase;
+  letter-spacing: inherit;
+}
+
+.progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 2px;
+  background: var(--line);
+}
+
+.progress-track span {
+  display: block;
+  height: 100%;
+  background: var(--burgundy);
+  transition: width 0.7s ease;
+}
+
+/* =========================================================
+   STAGES
+========================================================= */
+
+.center-stage,
+.content-stage {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 22px;
+  text-align: center;
+  animation: rise 0.7s ease both;
+}
+
+.content-stage {
+  align-items: stretch;
+  max-width: 1100px;
+  margin: auto;
+  text-align: left;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: var(--burgundy);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.display,
+.title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+}
+
+.display {
+  font-size: clamp(58px, 10vw, 132px);
+}
+
+.title {
+  font-size: clamp(46px, 7vw, 88px);
+}
+
+em {
+  color: var(--burgundy);
+  font-style: italic;
+}
+
+.lede {
+  margin: 28px 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.story-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  margin-top: 22px;
+  padding: 0 20px;
+  border: 1px solid var(--burgundy);
+  border-radius: 2px;
+  background: var(--burgundy);
+  color: var(--paper);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+
+.story-button:hover {
+  transform: translateY(-2px);
+  background: #64202c;
+}
+
+.story-button-subtle {
+  background: transparent;
+  color: var(--burgundy);
+}
+
+/* =========================================================
+   DATE / PASSWORD / COUNTDOWN
+========================================================= */
+
+.date-stamp {
+  margin-bottom: 38px;
+  color: var(--gold);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  letter-spacing: 0.15em;
+}
+
+.icon-burgundy {
+  margin-bottom: 22px;
+  color: var(--burgundy);
+}
+
+.password-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.password-form input {
+  width: 165px;
+  border: 0;
+  border-bottom: 1px solid var(--burgundy);
+  outline: 0;
+  background: transparent;
+  color: var(--burgundy);
+  text-align: center;
+  letter-spacing: 0.25em;
+  padding: 13px 5px;
+}
+
+.error-text {
+  color: var(--burgundy);
+  font-size: 13px;
+}
+
+.countdown {
+  color: var(--burgundy);
+  font-family: var(--font-serif);
+  font-size: clamp(100px, 20vw, 220px);
+  line-height: 0.8;
+}
+
+.anticipation .lede {
+  margin-top: 38px;
+}
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading {
+  margin-bottom: 60px;
+}
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.timeline {
+  border-top: 1px solid var(--line);
+  margin-bottom: 36px;
+}
+
+.timeline-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 22px;
+  align-items: center;
+  min-height: 105px;
+  border-bottom: 1px solid var(--line);
+}
+
+.timeline-row p {
+  max-width: 360px;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-serif);
+  font-size: 25px;
+  line-height: 1.05;
+}
+
+.date-label {
+  color: var(--burgundy);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 95px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* =========================================================
+   POLAROID GALLERY - 3 X 3
+========================================================= */
+
+.polaroids {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  width: 100%;
+  max-width: 1050px;
+  margin: 10px auto 28px;
+  align-items: start;
+}
+
+.polaroid {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 12px 18px;
+  background: var(--paper);
+  box-shadow: 0 10px 25px #6d4a3516;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.polaroid:nth-child(1) {
+  transform: rotate(-2.5deg);
+}
+
+.polaroid:nth-child(2) {
+  transform: rotate(2.5deg) translateY(10px);
+}
+
+.polaroid:nth-child(3) {
+  transform: rotate(-1deg);
+}
+
+.polaroid:nth-child(4) {
+  transform: rotate(1.8deg) translateY(8px);
+}
+
+.polaroid:nth-child(5) {
+  transform: rotate(-2deg);
+}
+
+.polaroid:nth-child(6) {
+  transform: rotate(2deg) translateY(10px);
+}
+
+.polaroid:nth-child(7) {
+  transform: rotate(-1.5deg);
+}
+
+.polaroid:nth-child(8) {
+  transform: rotate(2deg) translateY(8px);
+}
+
+.polaroid:nth-child(9) {
+  transform: rotate(-2deg);
+}
+
+.polaroid:hover {
+  z-index: 2;
+  transform: rotate(0deg) translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px #6d4a3521;
+}
+
+.photo-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  overflow: hidden;
+  background: var(--rose);
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.polaroid.red .photo-frame {
+  background: var(--rose);
+}
+
+.polaroid.cream .photo-frame {
+  background: #eadfce;
+}
+
+.polaroid.dark .photo-frame {
+  background: #51484a;
+}
+
+.polaroid-caption {
+  display: grid;
+  gap: 6px;
+  padding-top: 12px;
+  text-align: left;
+}
+
+.polaroid-caption strong {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.polaroid-caption small {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.gallery-note {
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* =========================================================
+   GAME
+========================================================= */
+
+.game-stage {
+  align-items: center;
+}
+
+.question-card {
+  width: min(100%, 520px);
+  margin-top: 38px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: #fffaf255;
+}
+
+.question-number {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.question-card h3 {
+  margin: 20px 0;
+  font-family: var(--font-serif);
+  font-size: 31px;
+  font-weight: 400;
+}
+
+.options {
+  display: grid;
+  gap: 8px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  padding: 13px 14px;
+  background: transparent;
+  color: var(--foreground);
+  text-align: left;
+}
+
+.option:hover,
+.option.correct {
+  border-color: var(--burgundy);
+  color: var(--burgundy);
+}
+
+.option.wrong {
+  opacity: 0.5;
+}
+
+.feedback {
+  color: var(--burgundy);
+  font-size: 13px;
+}
+
+.answer-reveal {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.answer-reveal strong {
+  color: var(--burgundy);
+  font-weight: 600;
+}
+
+/* =========================================================
+   TRAITS
+========================================================= */
+
+.traits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.traits span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 13px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.envelope {
+  position: relative;
+  width: min(82vw, 330px);
+  height: 210px;
+  margin: 28px 0 20px;
+  border: 0;
+  background: var(--burgundy);
+  box-shadow: 0 18px 35px #6d4a3520;
+}
+
+.envelope-paper {
+  position: absolute;
+  inset: 12px 15px;
+  z-index: 1;
+  padding: 18px 14px;
+  background: var(--paper);
+  color: var(--foreground);
+  font-family: var(--font-serif);
+  font-size: 13px;
+  line-height: 1.1;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.35s,
+    transform 0.6s;
+}
+
+.envelope-flap {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  height: 100px;
+  background: #963344;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform 0.6s;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .envelope-paper {
+  opacity: 1;
+  transform: translateY(-50px);
+}
+
+.envelope-seal {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--paper);
+  transform: translate(-50%, -50%);
+}
+
+/* =========================================================
+   PIXEL BIRTHDAY CAKE
+========================================================= */
+
+.pixel-cake {
+  position: relative;
+  width: 290px;
+  height: 255px;
+  margin: 42px 0 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  image-rendering: pixelated;
+
+  filter:
+    drop-shadow(0 20px 20px rgba(70, 40, 30, 0.16));
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.pixel-cake:hover {
+  transform: translateY(-4px);
+  filter:
+    drop-shadow(0 24px 28px rgba(70, 40, 30, 0.18));
+}
+
+.pixel-cake:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* =========================================================
+   PIXEL CAKE PLATE
+========================================================= */
+
+.pixel-plate {
+  position: absolute;
+  left: 25px;
+  bottom: 18px;
+
+  width: 240px;
+  height: 24px;
+
+  background: #f7eee2;
+
+  border: 4px solid #b78c55;
+
+  box-shadow:
+    0 4px 0 #8d633e,
+    inset 0 5px 0 #fff8ef;
+}
+
+/* =========================================================
+   PIXEL CAKE BODY
+========================================================= */
+
+.pixel-cake-body {
+  position: absolute;
+  left: 42px;
+  bottom: 40px;
+
+  width: 206px;
+  height: 95px;
+
+  background: #b95463;
+
+  border: 4px solid #75313b;
+
+  box-shadow:
+    inset 0 10px 0 #d9878c,
+    inset 0 -12px 0 #8f3847,
+    6px 6px 0 rgba(69, 39, 35, 0.18);
+}
+
+/* =========================================================
+   PIXEL CAKE TOP
+========================================================= */
+
+.pixel-cake-top {
+  position: absolute;
+
+  left: 42px;
+  bottom: 119px;
+
+  width: 206px;
+  height: 48px;
+
+  background: #f9e5d4;
+
+  border: 4px solid #75313b;
+
+  box-shadow:
+    inset 0 8px 0 #fff8ee,
+    5px 5px 0 rgba(69, 39, 35, 0.12);
+}
+
+/* =========================================================
+   FROSTING
+========================================================= */
+
+.pixel-frosting {
+  position: absolute;
+
+  left: 10px;
+  top: -3px;
+
+  width: 184px;
+  height: 22px;
+
+  background: #fff7ec;
+
+  border-bottom: 4px solid #d7b58e;
+
+  box-shadow:
+    0 5px 0 rgba(132, 86, 61, 0.12);
+}
+
+/* =========================================================
+   PIXEL DRIPS
+========================================================= */
+
+.pixel-drip {
+  position: absolute;
+  top: 11px;
+
+  width: 16px;
+
+  background: #fff7ec;
+
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.drip-one {
+  left: 42px;
+  height: 22px;
+}
+
+.drip-two {
+  left: 96px;
+  height: 31px;
+}
+
+.drip-three {
+  right: 34px;
+  height: 19px;
+}
+
+/* =========================================================
+   CAKE DECORATION
+========================================================= */
+
+.pixel-decoration {
+  position: absolute;
+
+  width: 14px;
+  height: 14px;
+
+  background: #d3a65c;
+
+  box-shadow:
+    0 0 0 2px rgba(255, 250, 240, 0.3);
+}
+
+.decoration-one {
+  left: 38px;
+  bottom: 25px;
+}
+
+.decoration-two {
+  left: 96px;
+  bottom: 18px;
+}
+
+.decoration-three {
+  right: 38px;
+  bottom: 28px;
+}
+
+/* =========================================================
+   NUMBER CANDLES
+========================================================= */
+
+.number-candle {
+  position: absolute;
+  z-index: 10;
+
+  bottom: 157px;
+
+  width: 48px;
+  height: 76px;
+
+  pointer-events: none;
+}
+
+.candle-one {
+  left: 92px;
+}
+
+.candle-nine {
+  right: 92px;
+}
+
+/* =========================================================
+   PIXEL NUMBER 1 / 9
+========================================================= */
+
+.pixel-number {
+  position: absolute;
+
+  left: 50%;
+  top: 14px;
+
+  transform: translateX(-50%);
+
+  color: #f8f0df;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 58px;
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing: -7px;
+
+  text-shadow:
+    4px 4px 0 #8a2635;
+
+  -webkit-text-stroke:
+    2px #7a2633;
+}
+
+/* =========================================================
+   WICK
+========================================================= */
+
+.number-wick {
+  position: absolute;
+
+  left: 50%;
+  top: 1px;
+
+  width: 4px;
+  height: 13px;
+
+  transform: translateX(-50%);
+
+  background: #342524;
+}
+
+/* =========================================================
+   REALISTIC FLAME
+========================================================= */
+
+.real-flame {
+  position: absolute;
+
+  left: 50%;
+  top: -25px;
+
+  width: 19px;
+  height: 30px;
+
+  transform:
+    translateX(-50%)
+    rotate(-2deg);
+
+  border-radius:
+    50% 50% 48% 48% /
+    62% 62% 38% 38%;
+
+  background:
+    radial-gradient(
+      circle at 50% 72%,
+      #fffaf0 0 20%,
+      #ffe9a7 21% 43%,
+      #ffb338 44% 68%,
+      #e9662d 69% 86%,
+      #9f2f36 87% 100%
+    );
+
+  box-shadow:
+    0 0 10px rgba(255, 175, 70, 0.55),
+    0 0 22px rgba(255, 140, 50, 0.25);
+
+  transform-origin: 50% 90%;
+
+  animation:
+    realistic-flame
+    0.65s
+    ease-in-out
+    infinite alternate;
+}
+
+.real-flame::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 4px;
+
+  width: 9px;
+  height: 15px;
+
+  transform: translateX(-50%);
+
+  border-radius:
+    50% 50% 45% 45%;
+
+  background: #fff9e9;
+
+  filter: blur(0.4px);
+}
+
+.real-flame::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: -8px;
+
+  width: 26px;
+  height: 10px;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 170, 70, 0.25),
+      transparent 70%
+    );
+
+  filter: blur(3px);
+}
+
+.real-flame.extinguished {
+  opacity: 0;
+
+  transform:
+    translateX(-50%)
+    scale(0.15)
+    translateY(12px);
+
+  animation: none;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.45s ease;
+}
+
+/* =========================================================
+   FLAME ANIMATION
+========================================================= */
+
+@keyframes realistic-flame {
+  0% {
+    transform:
+      translateX(-50%)
+      rotate(-5deg)
+      scale(0.94, 1);
+  }
+
+  25% {
+    transform:
+      translateX(-50%)
+      rotate(3deg)
+      scale(1.05, 0.96);
+  }
+
+  50% {
+    transform:
+      translateX(-50%)
+      rotate(-2deg)
+      scale(0.97, 1.04);
+  }
+
+  75% {
+    transform:
+      translateX(-50%)
+      rotate(4deg)
+      scale(1.04, 0.98);
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      rotate(-4deg)
+      scale(0.96, 1.03);
+  }
+}
+
+/* =========================================================
+   SURPRISE / FOOTER MUSIC
+========================================================= */
+
+.surprise-heart {
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  margin-bottom: 30px;
+  border: 1px solid var(--rose);
+  border-radius: 50%;
+  color: var(--burgundy);
+}
+
+.footer-music {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.footer input {
+  width: 55px;
+  accent-color: var(--burgundy);
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .polaroids {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    max-width: 720px;
+  }
+
+  .polaroid:nth-child(2),
+  .polaroid:nth-child(4),
+  .polaroid:nth-child(6),
+  .polaroid:nth-child(8) {
+    transform: rotate(1.8deg) translateY(8px);
+  }
+
+  .polaroid:nth-child(3),
+  .polaroid:nth-child(5),
+  .polaroid:nth-child(7),
+  .polaroid:nth-child(9) {
+    transform: rotate(-1.5deg);
+  }
+
+  .pixel-cake {
+    transform: scale(0.94);
+  }
+
+  .pixel-cake:hover {
+    transform: scale(0.96) translateY(-4px);
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .topbar,
+  .footer {
+    padding: 17px 18px;
+  }
+
+  .chapter {
+    display: none;
+  }
+
+  .footer {
+    font-size: 9px;
+  }
+
+  .footer-music {
+    gap: 4px;
+  }
+
+  .content-stage {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  /* Gallery */
+  .polaroids {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 420px;
+    margin: 35px auto 24px;
+  }
+
+  .polaroid {
+    width: 100%;
+    padding: 10px 10px 16px;
+  }
+
+  .polaroid:nth-child(1),
+  .polaroid:nth-child(3),
+  .polaroid:nth-child(5),
+  .polaroid:nth-child(7),
+  .polaroid:nth-child(9) {
+    transform: rotate(-1.5deg);
+  }
+
+  .polaroid:nth-child(2),
+  .polaroid:nth-child(4),
+  .polaroid:nth-child(6),
+  .polaroid:nth-child(8) {
+    transform: rotate(1.5deg) translateY(4px);
+  }
+
+  .polaroid:hover {
+    transform: translateY(-4px) rotate(0deg);
+  }
+
+  .photo-frame {
+    aspect-ratio: 1 / 1.12;
+  }
+
+  .polaroid-caption strong {
+    font-size: 16px;
+  }
+
+  .polaroid-caption small {
+    font-size: 9px;
+  }
+
+  /* Timeline */
+  .timeline-row {
+    grid-template-columns: 70px 1fr;
+    gap: 10px;
+  }
+
+  .timeline-dot {
+    left: 66px;
+  }
+
+  .timeline-row p {
+    font-size: 21px;
+  }
+
+  .section-heading {
+    margin-bottom: 45px;
+  }
+
+  /* Pixel cake */
+  .pixel-cake {
+    width: 270px;
+    height: 240px;
+    transform: scale(0.92);
+  }
+
+  .pixel-cake:hover {
+    transform: scale(0.94) translateY(-3px);
+  }
+
+  .pixel-plate {
+    left: 16px;
+    width: 238px;
+  }
+
+  .pixel-cake-body,
+  .pixel-cake-top {
+    left: 32px;
+    width: 206px;
+  }
+
+  .candle-one {
+    left: 82px;
+  }
+
+  .candle-nine {
+    right: 82px;
+  }
+
+  .pixel-number {
+    font-size: 54px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
