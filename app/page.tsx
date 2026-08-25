@@ -236,7 +236,7 @@ export default function Page() {
           <Lock className="icon-burgundy" size={22} />
           <p className="eyebrow">a tiny little lock</p>
           <h2 className="title">Only you can open this.</h2>
-          <p className="lede">Enter your welcome date to the world.</p>
+          <p className="lede">Enter a password</p>
           <form className="password-form" onSubmit={submitPassword}>
             <input
               autoFocus
@@ -254,7 +254,7 @@ export default function Page() {
             </Button>
           </form>
           {error && <p className="error-text">{error}</p>}
-          <p className="microcopy">a date only we would know</p>
+          <p className="microcopy">the day you came into this world</p>
         </section>
       )}
       {stage === "anticipation" && (
